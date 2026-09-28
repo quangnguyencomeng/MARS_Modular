@@ -4,6 +4,28 @@ Module 2 is a ROS-independent C++17 library. It consumes the geometric output
 of Module 1, keeps global exploration memory, builds an accumulated visibility
 graph, and reconstructs ordered bundle sequences for Module 3.
 
+For a guided explanation of the module layout, data flow, and runnable examples,
+see [the Module 2 guide](docs/module2_guide.md).
+
+## Quick orientation
+
+The main pipeline is `PerceptionResult` -> open-point memory and ranking ->
+visibility graph -> bundle history and route-ordered sequence. The public
+facade for this flow is `GraphBundleManager`; the lower-level components remain
+available for focused tests and offline integration.
+
+The quickest local verification is:
+
+```sh
+cmake -S . -B build -DMARS_BUILD_TESTS=ON
+cmake --build build
+ctest --test-dir build --output-on-failure
+```
+
+The synthetic, ROS-free example is built as
+`mars_graph_bundle_management_example` when tests are enabled. The guide shows
+how to run it and explains what output to expect.
+
 ## Build and verify
 
 From the `MARS_Modular` directory:
